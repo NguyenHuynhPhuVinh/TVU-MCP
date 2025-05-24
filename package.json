@@ -1,11 +1,11 @@
 {
-  "name": "TVU-MCP",
+  "name": "@tomisakae/tvu-mcp",
   "version": "1.0.0",
   "description": "MCP hỗ trợ tra cứu lịch học TVU và xem điểm!",
   "main": "index.js",
   "type": "module",
   "bin": {
-    "TVU-MCP": "./build/index.js"
+    "tvu-mcp": "./build/index.js"
   },
   "scripts": {
     "start": "node index.js",
