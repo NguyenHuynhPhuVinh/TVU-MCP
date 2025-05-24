@@ -19,8 +19,12 @@ MCP hỗ trợ tra cứu lịch học TVU và xem điểm!
 {
   "mcpServers": {
     "TVU-MCP": {
-      "command": "node",
-      "args": ["đường/dẫn/đến/build/index.js"]
+      "command": "npx",
+      "args": ["-y", "@tomisakae/tvu-mcp"],
+      "env": {
+        "MSSV": "",
+        "PASSWORD": ""
+      }
     }
   }
 }

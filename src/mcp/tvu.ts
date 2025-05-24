@@ -225,15 +225,12 @@ export function registerTvuTools(server: McpServer) {
         // Lấy ngày hôm nay
         const today = new Date();
 
-        // Thêm log để debug
-        console.log(`Ngày hiện tại: ${today}`);
 
         // Định dạng YYYY-MM-DD với múi giờ địa phương
         const todayString = `${today.getFullYear()}-${String(
           today.getMonth() + 1
         ).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
 
-        console.log(`Chuỗi ngày được sử dụng để tìm kiếm: ${todayString}`);
 
         // Tạo nội dung hiển thị
         let scheduleText = `# Thời khóa biểu hôm nay (${today.toLocaleDateString(
@@ -254,19 +251,7 @@ export function registerTvuTools(server: McpServer) {
           for (const tuan of scheduleData.data.ds_tuan_tkb) {
             if (!tuan.ds_thoi_khoa_bieu) continue;
 
-            // Thêm log để debug
-            console.log(`Đang tìm lịch học trong tuần: ${tuan.ten_tuan}`);
-            console.log(
-              `Số lượng môn học trong tuần: ${tuan.ds_thoi_khoa_bieu.length}`
-            );
 
-            // In ra tất cả các ngày học trong tuần này để debug
-            const cacNgayHoc = new Set(
-              tuan.ds_thoi_khoa_bieu.map((m: any) => m.ngay_hoc)
-            );
-            console.log(
-              `Các ngày học trong tuần: ${Array.from(cacNgayHoc).join(", ")}`
-            );
 
             // Tìm kiếm môn học có ngày học trùng với ngày hôm nay
             // Thử cả hai cách: so sánh chuỗi và so sánh ngày tháng năm
@@ -282,19 +267,12 @@ export function registerTvuTools(server: McpServer) {
                   ngayHoc.getMonth() === today.getMonth() &&
                   ngayHoc.getFullYear() === today.getFullYear();
 
-                console.log(
-                  `Môn: ${monHoc.ten_mon}, Ngày học: ${monHoc.ngay_hoc}, Hôm nay: ${todayString}`
-                );
-                console.log(
-                  `So sánh chuỗi: ${ketQua1}, So sánh ngày: ${ketQua2}`
-                );
 
                 // Sử dụng cả hai cách để đảm bảo tìm được môn học
                 return ketQua1 || ketQua2;
               }
             );
 
-            console.log(`Tìm thấy ${lichHocHomNay.length} môn học hôm nay`);
 
             if (lichHocHomNay.length > 0) {
               foundSchedule = true;
@@ -367,17 +345,12 @@ export function registerTvuTools(server: McpServer) {
         const tomorrow = new Date();
         tomorrow.setDate(tomorrow.getDate() + 1);
 
-        // Thêm log để debug
-        console.log(`Ngày mai: ${tomorrow}`);
 
         // Định dạng YYYY-MM-DD với múi giờ địa phương
         const tomorrowString = `${tomorrow.getFullYear()}-${String(
           tomorrow.getMonth() + 1
         ).padStart(2, "0")}-${String(tomorrow.getDate()).padStart(2, "0")}`;
 
-        console.log(
-          `Chuỗi ngày mai được sử dụng để tìm kiếm: ${tomorrowString}`
-        );
 
         // Tạo nội dung hiển thị
         let scheduleText = `# Thời khóa biểu ngày mai (${tomorrow.toLocaleDateString(
@@ -398,22 +371,6 @@ export function registerTvuTools(server: McpServer) {
           for (const tuan of scheduleData.data.ds_tuan_tkb) {
             if (!tuan.ds_thoi_khoa_bieu) continue;
 
-            // Thêm log để debug
-            console.log(
-              `Đang tìm lịch học ngày mai trong tuần: ${tuan.ten_tuan}`
-            );
-            console.log(
-              `Số lượng môn học trong tuần: ${tuan.ds_thoi_khoa_bieu.length}`
-            );
-
-            // In ra tất cả các ngày học trong tuần này để debug
-            const cacNgayHoc = new Set(
-              tuan.ds_thoi_khoa_bieu.map((m: any) => m.ngay_hoc)
-            );
-            console.log(
-              `Các ngày học trong tuần: ${Array.from(cacNgayHoc).join(", ")}`
-            );
-
             // Tìm kiếm môn học có ngày học trùng với ngày mai
             // Thử cả hai cách: so sánh chuỗi và so sánh ngày tháng năm
             const lichHocNgayMai = tuan.ds_thoi_khoa_bieu.filter(
@@ -428,19 +385,12 @@ export function registerTvuTools(server: McpServer) {
                   ngayHoc.getMonth() === tomorrow.getMonth() &&
                   ngayHoc.getFullYear() === tomorrow.getFullYear();
 
-                console.log(
-                  `Môn: ${monHoc.ten_mon}, Ngày học: ${monHoc.ngay_hoc}, Ngày mai: ${tomorrowString}`
-                );
-                console.log(
-                  `So sánh chuỗi: ${ketQua1}, So sánh ngày: ${ketQua2}`
-                );
 
                 // Sử dụng cả hai cách để đảm bảo tìm được môn học
                 return ketQua1 || ketQua2;
               }
             );
 
-            console.log(`Tìm thấy ${lichHocNgayMai.length} môn học ngày mai`);
 
             if (lichHocNgayMai.length > 0) {
               foundSchedule = true;
