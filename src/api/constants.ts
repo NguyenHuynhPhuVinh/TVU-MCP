@@ -13,6 +13,21 @@ export const ENDPOINTS = {
   
   // Thời khóa biểu
   GET_SCHEDULE: '/api/sch/w-locdstkbtuanusertheohocky',
+  
+  // Điểm học tập
+  GET_GRADES: '/public/api/srm/w-locdsdiemsinhvien',
+  
+  // Học phí
+  GET_TUITION: '/public/api/rms/w-locdstonghophocphisv',
+  
+  // Chương trình đào tạo
+  GET_CURRICULUM: '/public/api/sch/w-locdsctdtsinhvien',
+  
+  // Thông tin sinh viên
+  GET_STUDENT_INFO: '/public/api/dkmh/w-locsinhvieninfo',
+  
+  // Danh sách bài đăng (thông báo, hướng dẫn, biểu mẫu)
+  GET_POSTS: '/public/api/web/w-locdsbaidang',
 };
 
 // Cấu hình API

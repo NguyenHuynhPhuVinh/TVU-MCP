@@ -6,6 +6,11 @@ import { z } from "zod";
 import { TvuApiClient } from "../api/api.js";
 import { API_CONFIG } from "../api/constants.js";
 import { ENV } from "../config/config.js";
+import { registerGradesTools } from "./grades.js";
+import { registerTuitionTools } from "./tuition.js";
+import { registerCurriculumTools } from "./curriculum.js";
+import { registerStudentInfoTools } from "./student-info.js";
+import { registerPostsTools } from "./posts.js";
 
 /**
  * Đăng ký các công cụ MCP cho TVU
@@ -14,6 +19,21 @@ import { ENV } from "../config/config.js";
 export function registerTvuTools(server: McpServer) {
   // Khởi tạo API client
   const apiClient = new TvuApiClient();
+  
+  // Đăng ký công cụ xem điểm học tập
+  registerGradesTools(server, apiClient);
+  
+  // Đăng ký công cụ xem học phí
+  registerTuitionTools(server, apiClient);
+  
+  // Đăng ký công cụ xem chương trình đào tạo
+  registerCurriculumTools(server, apiClient);
+  
+  // Đăng ký công cụ xem thông tin sinh viên
+  registerStudentInfoTools(server, apiClient);
+  
+  // Đăng ký công cụ xem bài đăng (thông báo, hướng dẫn, biểu mẫu)
+  registerPostsTools(server, apiClient);
 
   // Đăng ký công cụ xem thời khóa biểu
   server.tool(
